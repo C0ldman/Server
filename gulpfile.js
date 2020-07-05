@@ -8,7 +8,7 @@ let fs = require('fs');
 let chalk = require('chalk');
 
 console.log(chalk.red.bold('Checking arguments...'));
-var projectDir = 'd:\\Program\\gulp_server\\projects';
+var projectDir = '/home/coldman/Documents/Projects';
 var serverPort = 80;
 
 
@@ -36,7 +36,7 @@ gulp.task('browserSync', function () {
     })
 });
 
-gulp.task('default', ['browserSync'], function () {
+gulp.task('default', gulp.series('browserSync', function () {
    
     if(argv.pres) {
         console.log(chalk.red.bold('Presentation'));
@@ -51,4 +51,4 @@ gulp.task('default', ['browserSync'], function () {
         gulp.watch(projectDir + '/index.html', browserSync.reload);
     };
 
-});
+}));
