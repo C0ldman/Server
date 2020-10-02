@@ -1,54 +1,42 @@
-let gulp = require('gulp');
-
+﻿let gulp = require('gulp');
+var plugins = require('gulp-load-plugins');
 let browserSync = require('browser-sync')
     .create();
+var $ = plugins({
+    pattern: ['*']
+});
 
-let argv = require('yargs').argv;
-let fs = require('fs');
-let chalk = require('chalk');
 
-console.log(chalk.red.bold('Checking arguments...'));
-var projectDir = '/home/coldman/Documents/Projects';
+console.log($.chalk.red.bold('Checking arguments...'));
+var projectDir = '../';
 var serverPort = 80;
 
 
-if (argv.dir) {
-    
-    projectDir = argv.dir
-    //let bbb = fs.readFileSync(projectDir);
-    //console.log(bbb);
-    console.log(chalk.red.bold('Directory set to ' + projectDir));
+if ($.yargs.argv.dir) {
+    projectDir = $.yargs.argv.dir;
 };
-
-if (argv.port) {
-    serverPort = argv.port;
-    console.log(chalk.red.bold('Port set to ' + serverPort));
+console.log($.chalk.red.bold('Directory set to ' + projectDir));
+if ($.yargs.argv.port) {
+    if ($.yargs.argv.port < 80) {
+        console.log($.chalk.red.bold('Port must be 80 or higher. Port set to default.'));
+    } else {
+        serverPort = $.yargs.argv.port;
+    }
 };
-
-gulp.task('browserSync', function () {
+console.log($.chalk.red.bold('Port set to ' + serverPort));
+gulp.task('browserSync', function() {
     browserSync.init({
         server: {
             baseDir: projectDir,
-            directory: true
+            directory: true,
+	    watch: false
         },
         port: serverPort,
 
     })
 });
 
-gulp.task('default', gulp.series('browserSync', function () {
-   
-    if(argv.pres) {
-        console.log(chalk.red.bold('Presentation'));
-            gulp.watch(projectDir + '/index.html', browserSync.reload);
-            gulp.watch(projectDir + '/app/*.html', browserSync.reload);
-            gulp.watch(projectDir + '/app/scripts/**/*.js', browserSync.reload);
-            gulp.watch(projectDir + '/app/controllers/**/*.js', browserSync.reload);
-            gulp.watch(projectDir + '/app/data/**/*.json', browserSync.reload);
-            gulp.watch(projectDir + '/app/i18n/**/*.json', browserSync.reload);
-            gulp.watch(projectDir + '/app/styles/**/*.css', browserSync.reload);
-    }else {        
-        gulp.watch(projectDir + '/index.html', browserSync.reload);
-    };
+gulp.task('default',gulp.series('browserSync', function() {
+      gulp.watch();
 
 }));

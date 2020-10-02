@@ -1,5 +1,4 @@
-node_modules/
-.idea/
+.idea
+node_modules
+build
 *.zip
-.irepctl
-/package-lock.json
