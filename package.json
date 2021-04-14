@@ -1,21 +1,14 @@
 {
-  "name": "g",
+  "name": "Server",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "node index"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "browser-sync": "^2.24.7",
-    "chalk": "^2.4.1",
-    "fs": "0.0.1-security",
-    "gulp": "^4.0.2",
-    "gulp-load-plugins": "^1.5.0",
-    "gulp-plumber": "^1.2.0",
-    "yargs": "^12.0.1"
-  },
-  "devDependencies": {}
+    "browser-sync": "^2.26.14"
+  }
 }

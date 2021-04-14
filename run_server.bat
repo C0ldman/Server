@@ -1,1 +1,1 @@
-gulp
+node index.js
